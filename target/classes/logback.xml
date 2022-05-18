@@ -1,0 +1,49 @@
+<configuration debug="true" scan="false">
+
+
+	<timestamp key="fecha" datePattern="dd-MM-yyyy" />
+
+
+	<appender name="AppenderFMR"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+
+		<file>F://logs//logFMR${fecha}.log</file>
+
+
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<fileNamePattern>F://logs//logFMR${fecha}.%i.log</fileNamePattern>
+			
+			<maxIndex>3</maxIndex>
+		</rollingPolicy>
+
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<maxFileSize>90KB</maxFileSize>
+		</triggeringPolicy>
+
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - [%method] - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="STDOUT"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - [%method] - %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+ 	
+	<logger name="com.nttdata.nttdatacenters_logback_t1_FMR" level="debug"  >
+			<appender-ref ref="STDOUT" />
+	</logger>
+	
+	<logger name="com.nttdata.iteration" level="debug"  >
+			<appender-ref ref="AppenderFMR" />
+	</logger>
+	
+
+	
+</configuration>
