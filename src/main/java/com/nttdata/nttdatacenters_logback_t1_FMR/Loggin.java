@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
-import java.util.function.Consumer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,7 +49,9 @@ public class Loggin {
 			if (!FICH.exists()) {
 
 				try {
+					
 					usersFile = new ObjectOutputStream(new FileOutputStream(FICH));
+					
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
@@ -60,7 +61,9 @@ public class Loggin {
 			} else {
 
 				try {
+					
 					usersFile = new IOUser(new FileOutputStream(FICH, true));
+					
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -77,22 +80,30 @@ public class Loggin {
 				// Si es diferente a 0 es que la edad era mayor o igual a 18 y se escribe el
 				// usuario en el fichero y muestra el saludo
 				if (user.getAge() == 0) {
+					
 					LOGGINGLOG.error("La edad es menor a 18 años no se puede crear la cuenta");
+					
 				} else {
+					
 					usersFile.writeObject(user);
 					LOGGINGLOG.info("El usuario se ha creado y guardado correctamente");
+					
 				}
 
 				usersFile.flush();
 				usersFile.close();
 
 			} catch (FileNotFoundException e) {
+				
 				e.printStackTrace();
 				LOGGINGLOG.error("No se ha encontrado el fichero");
+				
 			} catch (IOException e) {
+				
 				e.printStackTrace();
 				LOGGINGLOG.error(e.getMessage());
 				LOGGINGLOG.error(e.getLocalizedMessage());
+				
 			}
 
 		}
